@@ -2,21 +2,21 @@ td {
     padding: 7px;
 }
 .gray {
-    background: grey;
+    background: #b0acac;
     color: #fff;
 }
 .white {
     background: white;
 }
 .green {
-    color: green;
+    color: #0e990e;
 }
 .red {
     color: #e60000
 }
 .gray {
     td {
-        border: 1px solid gray;
+        border: 1px solid #b0acac;
     }
     .link {
         a {
@@ -27,12 +27,12 @@ td {
 }
 .white {
     td {
-        border: 1px solid gray;
+        border: 1px solid #b0acac;
     }
     .link {
         a {
             text-decoration: none;
-            color: gray
+            color: #b0acac
         }
     }
 }
