@@ -11,7 +11,7 @@ const ErrorModal = ({ errorText }) => {
 }
 
 ErrorModal.propTypes = {
-  errorText: PropTypes.string.isRequire
+  errorText: PropTypes.string.isRequired
 }
 
 export default ErrorModal
