@@ -4,10 +4,13 @@ import Loader from '../Loader/Loader'
 import TableRow from '../TableRow/TableRow'
 import Pagination from '../Pagination/Pagination'
 import './MainTable.style.scss'
+import ErrorModal from '../ErrorModal/ErrorModal'
 
 const MainTable = () => {
   const [data, setData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_CORS_SOLUTION}${process.env.REACT_APP_CRYPTO}?start=1&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
@@ -20,7 +23,8 @@ const MainTable = () => {
       })
       .catch(error => {
       // handle error
-        console.log(error)
+        setError(error)
+        setErrorMessage('Something went wrong! Try again in few minutes!')
       })
   }, [])
 
@@ -36,7 +40,8 @@ const MainTable = () => {
         })
         .catch(error => {
         // handle error
-          console.log(error)
+          setError(error)
+          setErrorMessage('Something went wrong! Try again in few minutes!')
         })
     }, 60000)
     return () => clearInterval(interval)
@@ -53,13 +58,15 @@ const MainTable = () => {
       })
       .catch(error => {
         // handle error
-        console.log(error)
+        setError(error)
+        setErrorMessage('Something went wrong! Try again in few minutes!')
       })
   }
   return (
   <>
 {isLoaded
-  ? <div className="table"><table>
+  ? (!error
+      ? <div className="table"><table>
     <thead>
         <tr>
             <th>Name</th>
@@ -77,6 +84,7 @@ const MainTable = () => {
     </table>
   <Pagination getValue={e => getDataValue(e)}/>
 </div>
+      : <ErrorModal errorText={errorMessage}/>)
   : <Loader />
 }
 </>

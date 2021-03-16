@@ -3,30 +3,35 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
+import ErrorModal from '../../components/ErrorModal/ErrorModal'
 import './CryptoPage.style.scss'
 
 const CryptoPage = ({ match }) => {
   const [singleCryptoData, setSingleCryptoData] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [error, setError] = useState(false)
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_CORS_SOLUTION}${process.env.REACT_APP_SINGLE_CRYPTO_DATA}?id=${match.params.id}`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
         // handle success
         if (response.status === 200) {
-          console.log(response.data)
           setSingleCryptoData(response.data.data[`${match.params.id}`])
           setIsLoaded(true)
         }
       })
       .catch(error => {
         // handle error
-        console.log(error)
+        setError(error)
+        setErrorMessage('Something went wrong! Try again in few minutes!')
       })
   }, [])
   return (
     <div className="crypto-container">
             {isLoaded
-              ? <>
+              ? (!error
+                  ? <>
               <img src={singleCryptoData.logo} />
               <p>Name: <strong>{singleCryptoData.name }</strong></p>
               <p>Symbol: <strong>{singleCryptoData.symbol}</strong></p>
@@ -60,6 +65,7 @@ const CryptoPage = ({ match }) => {
               <p>Offical Website: <a href={singleCryptoData.urls.website} target="_blank" rel="noreferrer"><strong>{singleCryptoData.urls.website}</strong></a></p>
               <span className="back-button"><Link to="/"><strong>Back To Table</strong></Link></span>
 </>
+                  : <ErrorModal errorText={errorMessage} />)
               : <Loader />
 }
     </div>
