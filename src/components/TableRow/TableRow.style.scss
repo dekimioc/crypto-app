@@ -14,3 +14,25 @@ td {
 .red {
     color: red
 }
+.gray {
+    td {
+        border: 1px solid gray;
+    }
+    .link {
+        a {
+            text-decoration: none;
+            color: #fff
+        }
+    }
+}
+.white {
+    td {
+        border: 1px solid gray;
+    }
+    .link {
+        a {
+            text-decoration: none;
+            color: gray
+        }
+    }
+}

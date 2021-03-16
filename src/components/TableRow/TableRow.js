@@ -14,7 +14,7 @@ const TableRow = ({ name, symbol, price, percent, rowColor, id }) => {
 
   return (
     <tr className={rowColor % 2 === 0 ? 'gray' : 'white'}>
-        <td><Link to={`${name}/${id}`}>{name}</Link></td>
+        <td className="link"><Link to={`${name}/${id}`}>{name}</Link></td>
         <td>{symbol}</td>
         <td>$ {price.toFixed(2)}</td>
         <td className={percent < 0 ? 'red' : 'green'}>{percent.toFixed(2)} %</td>

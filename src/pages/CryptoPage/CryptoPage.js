@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
 
 const CryptoPage = ({ match }) => {
@@ -28,30 +28,36 @@ const CryptoPage = ({ match }) => {
             {isLoaded
               ? <>
               <img src={singleCryptoData.logo} />
-              <p>Name: {singleCryptoData.name}</p>
-              <p>Symbol: {singleCryptoData.symbol}</p>
-              <p>Category: {singleCryptoData.category}</p>
-              <p>Twitter User Name: {singleCryptoData.twitter_username}</p>
-              <p>Twitter Link: {singleCryptoData.urls.twitter}</p>
+              <p>Name: <strong>{singleCryptoData.name }</strong></p>
+              <p>Symbol: <strong>{singleCryptoData.symbol}</strong></p>
+              <p>Id: <strong>{singleCryptoData.id}</strong></p>
+              <p>Category: <strong>{singleCryptoData.category}</strong></p>
+              <p>Added Date: <strong>{singleCryptoData.date_added}</strong></p>
+              <p>Twitter User Name: <strong>{singleCryptoData.twitter_username || '/'}</strong></p>
+              <p>Slug: <strong>{singleCryptoData.slug || '/'}</strong></p>
+              <p>Subreddit: <strong>{singleCryptoData.subreddit || '/'}</strong></p>
               <p>Description: <strong>{singleCryptoData.description}</strong></p>
-              <p>Tags Gropus: {singleCryptoData['tag-groups'].map((e, i) => <span key={i}>{e}, </span>)}</p>
-              <p>Tags Name: {singleCryptoData['tag-names'].map((e, i) => <span key={i}>{e}, </span>)}</p>
-              <p>Tags: {singleCryptoData.tags.map((e, i) => <span key={i}>{e}, </span>)}</p>
-              <p>Notice: <bold>{singleCryptoData.notice}</bold></p>
+              <div>Tags Gropus: <ul>{singleCryptoData['tag-groups'].map((e, i) => <strong key={i}><li>{e}, </li></strong>)}</ul></div>
+              <div>Tags Name: <ul>{singleCryptoData['tag-names'].map((e, i) => <strong key={i}><li >{e}, </li></strong>)}</ul></div>
+              <div>Tags: <ul>{singleCryptoData.tags.map((e, i) => <strong key={i}><li>{e}, </li></strong>)}</ul></div>
+              <p>Notice: <strong>{singleCryptoData.notice || '/'}</strong></p>
             {singleCryptoData.platform
               ? <div>Platform:
                 <ul>
-                  <li>ID: {singleCryptoData.platform.id}</li>
-                  <li>Name: {singleCryptoData.platform.name}</li>
-                  <li>Slug: {singleCryptoData.platform.slug}</li>
-                  <li>Symbol: {singleCryptoData.platform.symbol}</li>
-                  <li>Tokken Address: {singleCryptoData.platform.tokken_address}</li>
+                  <li>ID: <strong>{singleCryptoData.platform.id}</strong></li>
+                  <li>Name: <strong>{singleCryptoData.platform.name}</strong></li>
+                  <li>Slug: <strong>{singleCryptoData.platform.slug}</strong></li>
+                  <li>Symbol: <strong>{singleCryptoData.platform.symbol}</strong></li>
+                  <li>Tokken Address: <strong>{singleCryptoData.platform.tokken_address || '/'}</strong></li>
                 </ul>
               </div>
               : null
 }
-
-              <p>Offical Website: <Link to={singleCryptoData.urls.website}>{singleCryptoData.urls.website}</Link></p>
+              <div><p>Urls:</p>
+{Object.entries(singleCryptoData.urls).map((e, i) => <ul key={i}><li><span>{e[0]} :</span> <a href={e[1]} target='_blank' rel="noreferrer">{e[1] || '/'}</a></li></ul>)}
+              </div>
+              <p>Offical Website: <a href={singleCryptoData.urls.website} target="_blank" rel="noreferrer">{singleCryptoData.urls.website}</a></p>
+              <span className="back-button"><Link to="/">Back To Table</Link></span>
 </>
               : <Loader />
 }
