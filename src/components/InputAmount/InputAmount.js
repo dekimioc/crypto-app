@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './InputAmount.style.scss'
 
 const InputAmount = ({ name }) => {
-  const [ammountData, setAmmountData] = useState(localStorage.getItem(name))
+  const [ammountData, setAmmountData] = useState(localStorage.getItem(name) === null ? '' : localStorage.getItem(name))
 
   const onFormSendHandler = (e) => {
     e.preventDefault()
@@ -17,11 +17,7 @@ const InputAmount = ({ name }) => {
 
   return (
     <form className="submit-form" onSubmit={e => onFormSendHandler(e)}>
-        <input id="number-input" type="number" value={ammountData} onChange={e => inputValueHandler(e)} onKeyPress={(event) => {
-          if (!/[0-9]/.test(event.key)) {
-            event.preventDefault()
-          }
-        }}/>
+        <input id="number-input" type="number" value={ammountData} onChange={e => inputValueHandler(e)}/>
         <input type="submit" value="Submit" />
     </form>
   )

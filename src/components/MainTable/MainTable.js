@@ -8,25 +8,41 @@ import './MainTable.style.scss'
 const MainTable = () => {
   const [data, setData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
-  // const [dataStart, setDataStart] = useState()
-  // const [dataLimit, setDataLimit] = useState()
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_CRYPTO}?start=1&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
-        // handle success
+      // handle success
         if (response.status === 200) {
           setData(response.data.data)
           setIsLoaded(true)
         }
       })
       .catch(error => {
-        // handle error
+      // handle error
         console.log(error)
       })
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios.get(`${process.env.REACT_APP_CRYPTO}?start=${localStorage.getItem('startNumber')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+        .then(response => {
+        // handle success
+          if (response.status === 200) {
+            setData(response.data.data)
+            setIsLoaded(true)
+          }
+        })
+        .catch(error => {
+        // handle error
+          console.log(error)
+        })
+    }, 60000)
+    return () => clearInterval(interval)
+  }, [])
+
   const getDataValue = (e) => {
-    console.log(e.target.getAttribute('datastart'))
     axios.get(`${process.env.REACT_APP_CRYPTO}?start=${e.target.getAttribute('datastart')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
         // handle success

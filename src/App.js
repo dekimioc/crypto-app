@@ -1,14 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import ContainerWrapper from './components/ContainerWrapper/ContainerWrapper'
 
 import './App.css'
 import MainTable from './components/MainTable/MainTable'
 import CryptoPage from './pages/CryptoPage/CryptoPage'
 
-function App({ match }) {
-  console.log(match)
+function App() {
   return (
     <BrowserRouter>
 <ContainerWrapper>
@@ -20,9 +18,5 @@ function App({ match }) {
     </BrowserRouter>
   )
 };
-
-App.propTypes = {
-  match: PropTypes.object.isRequired
-}
 
 export default App

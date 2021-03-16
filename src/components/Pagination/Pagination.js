@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import './Pagination.style.scss'
+import { paginationData } from '../../assets/pagination-data'
 
 const Pagination = ({ getValue }) => {
+  const [activeNumber, setActiveNumber] = useState(1)
+
+  const getActivePageHandler = (e) => {
+    setActiveNumber(parseInt(e.target.getAttribute('id')))
+    localStorage.setItem('startNumber', e.target.getAttribute('datastart'))
+  }
+
   return (
+
     <div className="pagination">
-        <p datastart="1" className="active" onClick={(e) => getValue(e)}>1</p>
-        <p datastart="11" onClick={(e) => getValue(e)}>2</p>
-        <p datastart="21" onClick={(e) => getValue(e)}>3</p>
-        <p datastart="31" onClick={(e) => getValue(e)}>4</p>
-        <p datastart="41" onClick={(e) => getValue(e)}>5</p>
+{paginationData.map(e => <p id={e.number} key={e.number} datastart={e.dataStart} className={activeNumber === e.number ? 'active' : null} onClick={(e) => { getValue(e); getActivePageHandler(e) }}>{e.number}</p>)}
     </div>
   )
 }
