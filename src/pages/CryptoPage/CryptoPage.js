@@ -9,7 +9,7 @@ const CryptoPage = ({ match }) => {
   const [singleCryptoData, setSingleCryptoData] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SINGLE_CRYPTO_DATA}?id=${match.params.id}`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+    axios.get(`${process.env.REACT_APP_CORS_SOLUTION}${process.env.REACT_APP_SINGLE_CRYPTO_DATA}?id=${match.params.id}`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
         // handle success
         if (response.status === 200) {

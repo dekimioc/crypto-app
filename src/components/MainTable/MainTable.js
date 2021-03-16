@@ -10,7 +10,7 @@ const MainTable = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_CRYPTO}?start=1&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+    axios.get(`${process.env.REACT_APP_CORS_SOLUTION}${process.env.REACT_APP_CRYPTO}?start=1&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
       // handle success
         if (response.status === 200) {
@@ -26,7 +26,7 @@ const MainTable = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      axios.get(`${process.env.REACT_APP_CRYPTO}?start=${localStorage.getItem('startNumber')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+      axios.get(`${process.env.REACT_APP_CORS_SOLUTION}$${process.env.REACT_APP_CRYPTO}?start=${localStorage.getItem('startNumber')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
         .then(response => {
         // handle success
           if (response.status === 200) {
@@ -43,7 +43,7 @@ const MainTable = () => {
   }, [])
 
   const getDataValue = (e) => {
-    axios.get(`${process.env.REACT_APP_CRYPTO}?start=${e.target.getAttribute('datastart')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+    axios.get(`${process.env.REACT_APP_CORS_SOLUTION}${process.env.REACT_APP_CRYPTO}?start=${e.target.getAttribute('datastart')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
         // handle success
         if (response.status === 200) {
