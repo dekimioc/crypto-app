@@ -17,7 +17,11 @@ const InputAmount = ({ name }) => {
 
   return (
     <form className="submit-form" onSubmit={e => onFormSendHandler(e)}>
-        <input id="number-input" type="number" value={ammountData} onChange={e => inputValueHandler(e)}/>
+        <input id="number-input" type="number" value={ammountData} onChange={e => inputValueHandler(e)} onKeyPress={(event) => {
+          if (!/[0-9]/.test(event.key)) {
+            event.preventDefault()
+          }
+        }}/>
         <input type="submit" value="Submit" />
     </form>
   )

@@ -35,7 +35,7 @@ const MainTable = () => {
         </tr>
     </thead>
 <tbody>
-    {data.map((e, i) => <TableRow key={e.id} name={e.name} symbol={e.symbol} price={e.quote.USD.price} percent={e.quote.USD.percent_change_24h} inputValue={localStorage.getItem(e.name)} rowColor={i} />
+    {data.map((e, i) => <TableRow id={e.id} key={e.id} name={e.name} symbol={e.symbol} price={e.quote.USD.price} percent={e.quote.USD.percent_change_24h} inputValue={localStorage.getItem(e.name)} rowColor={i} />
     )}
 </tbody>
     </table>
