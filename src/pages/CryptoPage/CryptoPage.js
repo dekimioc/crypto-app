@@ -53,9 +53,10 @@ const CryptoPage = ({ match }) => {
               </div>
               : null
 }
-              <div><p>Urls:</p>
-{Object.entries(singleCryptoData.urls).map((e, i) => <ul key={i}><li><span>{e[0]} :</span> <a href={e[1]} target='_blank' rel="noreferrer">{e[1] || '/'}</a></li></ul>)}
-              </div>
+              <div>
+                <p>Urls:</p>
+                {Object.entries(singleCryptoData.urls).map((e, i) => <ul key={i}><li><span>{e[0]} :</span> {e[1].length > 1 ? e[1].map((e, i) => <a key={i} href={e} target='_blank' rel="noreferrer">{e}<br></br></a>) : <a href={e[1]}>{e[1]}</a>}</li></ul>)}
+                </div>
               <p>Offical Website: <a href={singleCryptoData.urls.website} target="_blank" rel="noreferrer">{singleCryptoData.urls.website}</a></p>
               <span className="back-button"><Link to="/">Back To Table</Link></span>
 </>
