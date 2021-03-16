@@ -3,5 +3,15 @@
     flex-direction: column;
     #number-input {
         text-align: center;
-}
+    }
+    .disabled {
+        cursor: not-allowed;
+        background: red;
+        color: #fff;
+    }
+    .enabled {
+        background-color: green;
+        color: #fff;
+        cursor: pointer;
+    }
 }

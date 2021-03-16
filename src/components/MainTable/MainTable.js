@@ -22,7 +22,7 @@ const MainTable = () => {
       // handle error
         console.log(error)
       })
-  }, [])
+  }, [isLoaded])
 
   useEffect(() => {
     const interval = setInterval(() => {
