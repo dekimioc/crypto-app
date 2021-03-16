@@ -4,7 +4,7 @@ import './Pagination.style.scss'
 import { paginationData } from '../../assets/pagination-data'
 
 const Pagination = ({ getValue }) => {
-  const [paginationNumber, setPaginationNumber] = useState(parseInt(localStorage.getItem('paginationNumber')))
+  const [paginationNumber, setPaginationNumber] = useState(localStorage.getItem('paginationNumber') === null ? 1 : parseInt(localStorage.getItem('paginationNumber')))
   const getActivePageHandler = (e) => {
     localStorage.setItem('startNumber', e.target.getAttribute('datastart'))
     localStorage.setItem('paginationNumber', e.target.getAttribute('id'))
