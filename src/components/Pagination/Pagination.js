@@ -9,6 +9,7 @@ const Pagination = ({ getValue }) => {
   const getActivePageHandler = (e) => {
     setActiveNumber(parseInt(e.target.getAttribute('id')))
     localStorage.setItem('startNumber', e.target.getAttribute('datastart'))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (

@@ -59,7 +59,7 @@ const MainTable = () => {
   return (
   <>
 {isLoaded
-  ? <><table>
+  ? <div className="table"><table>
     <thead>
         <tr>
             <th>Name</th>
@@ -76,7 +76,7 @@ const MainTable = () => {
 </tbody>
     </table>
   <Pagination getValue={e => getDataValue(e)}/>
-</>
+</div>
   : <Loader />
 }
 </>

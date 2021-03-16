@@ -1,0 +1,40 @@
+.crypto-container {
+        padding: 2rem 1rem 4rem 1rem;
+    ul {
+        list-style: none;
+        padding-left: 10px;
+    }
+    a {
+        text-decoration: none;
+        color: #000;
+        position: relative;
+        width: fit-content;
+        transition: all .4s linear;
+        word-break: break-all;
+        &:after {
+            content: "";
+            width: 0;
+            left: 0;
+            height: 2px;
+            position: absolute;
+            bottom: 0;
+            background: #000;
+            transition: all .4s linear;
+        }
+        &:hover {
+            &:after {
+            width: 100%;
+            }
+        }
+    }
+    .web-links {
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .back-button {
+        text-decoration: none; 
+        font-size: 20px;
+    } 
+}

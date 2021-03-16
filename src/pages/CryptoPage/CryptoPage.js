@@ -3,6 +3,7 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
+import './CryptoPage.style.scss'
 
 const CryptoPage = ({ match }) => {
   const [singleCryptoData, setSingleCryptoData] = useState({})
@@ -23,8 +24,7 @@ const CryptoPage = ({ match }) => {
       })
   }, [])
   return (
-    <div>
-      {console.log(singleCryptoData)}
+    <div className="crypto-container">
             {isLoaded
               ? <>
               <img src={singleCryptoData.logo} />
@@ -55,10 +55,10 @@ const CryptoPage = ({ match }) => {
 }
               <div>
                 <p>Urls:</p>
-                {Object.entries(singleCryptoData.urls).map((e, i) => <ul key={i}><li><span>{e[0]} :</span> {e[1].length > 1 ? e[1].map((e, i) => <a key={i} href={e} target='_blank' rel="noreferrer">{e}<br></br></a>) : <a href={e[1]}>{e[1]}</a>}</li></ul>)}
+                {Object.entries(singleCryptoData.urls).map((e, i) => <ul className="web-links" key={i}><li><span>{e[0]} :</span> {e[1].length > 1 ? e[1].map((e, i) => <a key={i} href={e} target='_blank' rel="noreferrer"><strong>{e || '/'}</strong></a>) : <a href={e[1].length === 0 ? '#' : e[1]}><strong>{e[1].length === 0 ? '/' : e[1]}</strong></a>}</li></ul>)}
                 </div>
-              <p>Offical Website: <a href={singleCryptoData.urls.website} target="_blank" rel="noreferrer">{singleCryptoData.urls.website}</a></p>
-              <span className="back-button"><Link to="/">Back To Table</Link></span>
+              <p>Offical Website: <a href={singleCryptoData.urls.website} target="_blank" rel="noreferrer"><strong>{singleCryptoData.urls.website}</strong></a></p>
+              <span className="back-button"><Link to="/"><strong>Back To Table</strong></Link></span>
 </>
               : <Loader />
 }
