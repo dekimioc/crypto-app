@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Loader from '../Loader/Loader'
 import TableRow from '../TableRow/TableRow'
+import Pagination from '../Pagination/Pagination'
+import './MainTable.style.scss'
 
 const MainTable = () => {
   const [data, setData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+  // const [dataStart, setDataStart] = useState()
+  // const [dataLimit, setDataLimit] = useState()
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_CRYPTO}`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+    axios.get(`${process.env.REACT_APP_CRYPTO}?start=1&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
       .then(response => {
         // handle success
         if (response.status === 200) {
@@ -20,10 +24,26 @@ const MainTable = () => {
         console.log(error)
       })
   }, [])
+
+  const getDataValue = (e) => {
+    console.log(e.target.getAttribute('datastart'))
+    axios.get(`${process.env.REACT_APP_CRYPTO}?start=${e.target.getAttribute('datastart')}&limit=10`, { headers: { 'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_CRYPTO_API_KEY}` } })
+      .then(response => {
+        // handle success
+        if (response.status === 200) {
+          setData(response.data.data)
+          setIsLoaded(true)
+        }
+      })
+      .catch(error => {
+        // handle error
+        console.log(error)
+      })
+  }
   return (
   <>
 {isLoaded
-  ? <table>
+  ? <><table>
     <thead>
         <tr>
             <th>Name</th>
@@ -39,6 +59,8 @@ const MainTable = () => {
     )}
 </tbody>
     </table>
+  <Pagination getValue={e => getDataValue(e)}/>
+</>
   : <Loader />
 }
 </>
